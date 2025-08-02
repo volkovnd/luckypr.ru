@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/volkovnd/luckypr.ru/issues"
   },
-  "homepage": "https://github.com/volkovnd/luckypr.ru#readme",
+  "homepage": "https://luckypr.ru",
   "private": true,
   "type": "module",
   "scripts": {

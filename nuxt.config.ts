@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     telemetry: false,
   },
   app: {
+    baseURL: import.meta.env.NUXT_APP_BASE_URL || '/',
     head: {
       htmlAttrs: { lang: 'ru' },
       meta: [
@@ -25,7 +26,7 @@ export default defineNuxtConfig({
         {
           type: 'image/x-icon',
           rel: 'icon',
-          href: '/favicon.ico',
+          href: `${import.meta.env.NUXT_APP_BASE_URL || '/'}favicon.ico`,
         },
       ],
     },
