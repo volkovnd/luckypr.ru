@@ -1,14 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-
   modules: [
-    '@nuxt/content',
     '@nuxt/eslint',
     '@nuxt/fonts',
-    '@nuxt/image',
   ],
-  devtools: { enabled: true, telemetry: false },
-
+  devtools: {
+    enabled: true,
+    telemetry: false,
+  },
   app: {
     head: {
       htmlAttrs: { lang: 'ru' },
@@ -31,7 +30,26 @@ export default defineNuxtConfig({
       ],
     },
   },
+  css: ['normalize.css'],
   compatibilityDate: '2025-07-15',
+
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          silenceDeprecations: ['import'],
+          additionalData(source, filename) {
+            // Пока просто проверяем по названию файла, что не вставляем в variables содержимое самого себя
+            if (filename.indexOf('variables') !== -1) {
+              return source
+            }
+
+            return `@use '~/assets/styles/variables' as *;\n${source}`
+          },
+        },
+      },
+    },
+  },
   telemetry: { enabled: false },
   eslint: {
     config: {
@@ -41,16 +59,24 @@ export default defineNuxtConfig({
   },
 
   fonts: {
-    families: [{
-      name: 'Roboto',
-      display: 'swap',
-      provider: 'google',
-
-    }],
+    families: [
+      {
+        name: 'Roboto',
+        display: 'swap',
+        provider: 'google',
+      },
+    ],
     defaults: {
-      subsets: ['cyrillic', 'latin'],
+      subsets: [
+        'cyrillic',
+        'latin',
+      ],
       preload: true,
-      weights: [400, 500, 700],
+      weights: [
+        400,
+        500,
+        700,
+      ],
     },
   },
 })
